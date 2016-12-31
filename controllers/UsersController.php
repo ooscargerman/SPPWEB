@@ -90,7 +90,7 @@ class UsersController extends Controller
 
         $password = Yii::$app->request->post("password", "");
         if($password == ""){
-            return $error = "pon la password alv.";
+            return $error = "pon la password alv. ;v";
         }else{
             $model->password = Yii::$app->getSecurity()->generatePasswordHash($password);
         }
