@@ -41,7 +41,7 @@ class UsersSearch extends Users
      */
     public function search($params)
     {
-        $query = Users::find();
+        $query = Users::find()->andWhere(["deleted"=>null]);
 
         // add conditions that should always apply here
 
@@ -66,7 +66,7 @@ class UsersSearch extends Users
             'phone' => $this->phone,
             'registerDate' => $this->registerDate,
             'ssn' => $this->ssn,
-            'deleted' => $this->deleted,
+            'deleted' => null,
         ]);
 
         $query->andFilterWhere(['like', 'username', $this->username])

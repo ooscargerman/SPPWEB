@@ -7,6 +7,7 @@ use app\models\Users;
 use app\models\UsersSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 
 /**
@@ -14,12 +15,22 @@ use yii\filters\VerbFilter;
  */
 class UsersController extends Controller
 {
+
     /**
      * @inheritdoc
      */
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@']
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -61,11 +72,32 @@ class UsersController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
+    public function randomNumber()
+    {
+        //for generating random number
+        $length =3;
+        $chars = array_merge(range(0,9));
+        shuffle($chars);
+        $number = implode(array_slice($chars, 0,$length));
+        return $number;
+
+    }
     public function actionCreate()
     {
         $model = new Users();
+        $model->load(Yii::$app->request->post());
+        $model->folioId = $this->randomNumber();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $password = Yii::$app->request->post("password", "");
+        if($password == ""){
+            return $error = "pon la password alv.";
+        }else{
+            $model->password = Yii::$app->getSecurity()->generatePasswordHash($password);
+        }
+
+
+
+        if ( $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -86,6 +118,7 @@ class UsersController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
+
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -101,9 +134,19 @@ class UsersController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
 
-        return $this->redirect(['index']);
+        //$user = Users::findOne($id);
+        $model->deleted = date('Y-m-d H:i:s');
+        //$model->save();
+        //$this->findModel($id)->delete();
+        if ($model->save()) {
+            return $this->redirect(['index']);
+
+        }else{
+        var_dump($model->getErrors());
+
+        }
     }
 
     /**

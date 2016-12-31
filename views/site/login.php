@@ -10,38 +10,80 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields to login:</p>
 
-    <?php $form = ActiveForm::begin([
-        'id' => 'login-form',
-        'layout' => 'horizontal',
-        'fieldConfig' => [
-            'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-            'labelOptions' => ['class' => 'col-lg-1 control-label'],
-        ],
-    ]); ?>
+    <div class="padding-15">
 
-        <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+        <div class="login-box">
 
-        <?= $form->field($model, 'password')->passwordInput() ?>
+            <!-- login form -->
+            <div class="sky-form boxed">
+                <header><i class="fa fa-users"></i> Sign In</header>
 
-        <?= $form->field($model, 'rememberMe')->checkbox([
-            'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
-        ]) ?>
+                <!--
+                <div class="alert alert-danger noborder text-center weight-400 nomargin noradius">
+                    Invalid Email or Password!
+                </div>
 
-        <div class="form-group">
-            <div class="col-lg-offset-1 col-lg-11">
-                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                <div class="alert alert-warning noborder text-center weight-400 nomargin noradius">
+                    Account Inactive!
+                </div>
+
+                <div class="alert alert-default noborder text-center weight-400 nomargin noradius">
+                    <strong>Too many failures!</strong> <br />
+                    Please wait: <span class="inlineCountdown" data-seconds="180"></span>
+                </div>
+                -->
+
+                <fieldset>
+                    <?php $form = ActiveForm::begin([
+                        'id' => 'login-form',
+                        'layout' => 'horizontal',
+                        'fieldConfig' => [
+
+                            'template' => "<label class=\"input\"><i class=\"icon-append fa fa-envelope\"></i>{input}</label></label>\n<div class=\"col-lg-8\">{error}</div>",
+
+                            'labelOptions' => ['class' => 'col-lg-1 control-label'],
+                        ],
+                    ]); ?>
+
+                    <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+
+                    <?= $form->field($model, 'password')->passwordInput() ?>
+
+                    <?= $form->field($model, 'rememberMe')->checkbox([
+                        'template' => "{input} {label}\n<div class=\"col-lg-8\">{error}</div>",
+                    ]) ?>
+
+
+
+
+
+                </fieldset>
+
+                <footer>
+                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary pull-right', 'name' => 'login-button']) ?>
+                    <?php ActiveForm::end(); ?>
+
+                    <div class="forgot-password pull-left">
+                        <a href="page-password.html">Forgot password?</a> <br />
+                        <a href="page-register.html"><b>Need to Register?</b></a>
+                    </div>
+                </footer>
             </div>
+            <!-- /login form -->
+
+            <hr />
+
+            <div class="text-center">
+                Or sign in using:
+            </div>
+
+
+            <div class="socials margin-top-10 text-center"><!-- more buttons: ui-buttons.html -->
+                <a href="#" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
+                <a href="#" class="btn btn-twitter"><i class="fa fa-twitter"></i> Twitter</a>
+            </div>
+
         </div>
-
-    <?php ActiveForm::end(); ?>
-
-    <div class="col-lg-offset-1" style="color:#999;">
-        You may login with <strong>admin/admin</strong> or <strong>demo/demo</strong>.<br>
-        To modify the username/password, please check out the code <code>app\models\User::$users</code>.
-    </div>
 </div>

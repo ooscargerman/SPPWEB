@@ -8,22 +8,22 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="users-search">
+<div id="search" class="users-search hidden">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <?php // $form->field($model, 'id') ?>
 
     <?= $form->field($model, 'folioId') ?>
 
-    <?= $form->field($model, 'username') ?>
+    <?php //$form->field($model, 'username') ?>
 
-    <?= $form->field($model, 'password') ?>
+    <?php // $form->field($model, 'password') ?>
 
-    <?= $form->field($model, 'email') ?>
+    <?php //$form->field($model, 'email') ?>
 
     <?php // echo $form->field($model, 'address') ?>
 

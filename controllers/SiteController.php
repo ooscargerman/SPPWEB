@@ -28,6 +28,7 @@ class SiteController extends Controller
                     ],
                 ],
             ],
+
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -58,9 +59,15 @@ class SiteController extends Controller
      *
      * @return string
      */
+
     public function actionIndex()
     {
-        return $this->render('index');
+        if (Yii::$app->user->isGuest) {
+            Yii::$app->user->loginRequired();
+        }else{
+            return $this->render('index');
+        }
+
     }
 
     /**

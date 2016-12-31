@@ -562,6 +562,7 @@ class Security extends Component
         return strtr(substr(base64_encode($bytes), 0, $length), '+/', '_-');
     }
 
+
     /**
      * Generates a secure hash from a password and a random salt.
      *
