@@ -85,19 +85,19 @@ class UsersController extends Controller
     public function actionCreate()
     {
         $model = new Users();
-        $model->load(Yii::$app->request->post());
+       // $model->load(Yii::$app->request->post());
         $model->folioId = $this->randomNumber();
 
-        $password = Yii::$app->request->post("password", "");
-        if($password == ""){
-            return $error = "pon la password alv. ;v";
-        }else{
-            $model->password = Yii::$app->getSecurity()->generatePasswordHash($password);
-        }
+        //$password = Yii::$app->request->post("password", "");
+        //if($password == ""){
+          //  return $error = "pon la password alv. ;v";
+        //}else{
+       //     $model->password = Yii::$app->getSecurity()->generatePasswordHash($password);
+        //}
 
 
 
-        if ( $model->save()) {
+        if ( $model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
