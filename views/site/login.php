@@ -39,20 +39,24 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php $form = ActiveForm::begin([
                         'id' => 'login-form',
                         'layout' => 'horizontal',
-                        'fieldConfig' => [
 
-                            'template' => "<label class=\"input\"><i class=\"icon-append fa fa-envelope\"></i>{input}</label></label>\n<div class=\"col-lg-8\">{error}</div>",
-
-                            'labelOptions' => ['class' => 'col-lg-1 control-label'],
-                        ],
                     ]); ?>
 
-                    <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+                    <?= $form->field($model, 'username', ['options'=> [
+                        'tag' => 'div',
+                    ],
+                        'template' => '<label class="input"><i class="icon-append fa fa-user"></i>{input}</label></label>{error}'
+                    ])->textInput(['autofocus' => true, 'placeholder' =>'Username']) ?>
 
-                    <?= $form->field($model, 'password')->passwordInput() ?>
+                    <?= $form->field($model, 'password', ['options'=> [
+                        'tag' => 'div',
+                    ],
+                        'template' => '<label class="input"><i class="icon-append fa fa-lock"></i>{input}</label></label>{error}'
+                    ])->passwordInput(['placeholder'=>'Password']) ?>
+
 
                     <?= $form->field($model, 'rememberMe')->checkbox([
-                        'template' => "{input} {label}\n<div class=\"col-lg-8\">{error}</div>",
+                        'template' => "<label class=\"checkbox checkbox2\">{input}<i></i>Remember me</label>\n<div class=\"col-lg-8\">{error}</div>",
                     ]) ?>
 
 

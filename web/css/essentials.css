@@ -5067,6 +5067,8 @@ section.dark select>optgroup {
 
 /* @toggle switch elements 
 -------------------------------------------------- */
+
+
 .switch {
 	cursor:pointer; 
 	position: relative; 
@@ -9305,6 +9307,9 @@ section.dark h2.owl-featured {
 	line-height: 27px;
 	color: #404040;
 	cursor: pointer;
+}
+.checkbox2 {
+	right: -16px;
 }
 .sky-form .radio:last-child,
 .sky-form .checkbox:last-child {
